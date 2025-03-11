@@ -192,4 +192,13 @@ console.log(inst);//mini
 const {title, price} = course;
 console.log(title);//javascript
 console.log(price);//1000
+console.clear();
+//in react
+// const navbar = ({company}) => {//destructuring in function
+//     console.log(company);//abc
+//     console.log("navbar");//navbar
+
+
+// }
+// navbar(company = "abc")
 
