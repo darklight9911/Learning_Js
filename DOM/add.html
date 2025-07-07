@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const newdiv = document.createElement('div');
+    newdiv.innerHTML = '<h1>Hello World</h1>';
+    newdiv.style.color = 'orange';
+    newdiv.style.backgroundColor = 'black';
+    newdiv.style.padding = '10px';
+    newdiv.className = 'mydiv';
+    newdiv.id = Math.round((Math.random*10)+1);
+    newdiv.setAttribute('title', 'This is a title');
+    newdiv.innerText = 'This is a new div element';
+    //Or
+    const addtext = document.createTextNode('This is a new div element');
+    newdiv.appendChild(addtext);//maybe optimal
+
+    //adding to thee body   **
+    document.body.appendChild(newdiv);
+    
+</script>
+</html>

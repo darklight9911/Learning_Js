@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body>
+    <ul class="language">
+        <li>Javascript</li>
+    </ul>
+    
+</body>
+<script>
+    function addLanguage(Lname) {
+        const newLanguage = document.createElement('li');
+        newLanguage.innerHTML= `${Lname}`;
+        const languageList = document.querySelector('.language');
+        languageList.appendChild(newLanguage);
+    }
+    addLanguage('Python');
+    addLanguage('Java');
+    //there exists optimization issues bcz tree traversal is not efficient
+    //we can use document fragment to optimize this
+    function addLanguages(languages) {
+        const fragment = document.createElement('li');
+        fragment.appendChild(document.createTextNode(languages));
+        document.querySelector('.language').appendChild(fragment);
+    }
+    addLanguages(['C', 'C++', 'Ruby']);
+    //we can also use forEach to add multiple languages
+    const languages = ['C#', 'Go', 'Rust'];
+    languages.forEach(language => {
+        addLanguage(language);
+    });
+
+
+    //EDIT **
+
+    const secLang = document.querySelector('li:nth-child(2)');
+    secLang.innerHTML = 'JavaScript';
+    //we can also use textContent to change the text of an element
+    const newli = document.createElement('li');
+    newli.textContent = 'TypeScript';
+    const languageList = document.querySelector('.language');
+    languageList.replaceChild(newli, secLang);
+    //Or
+    //languageList.replaceWith(newli);
+    //Or
+    const firstLang = document.querySelector('li:first-child');
+    firstLang.outerHTML = '<li>JavaScript</li>';
+
+    //remove  **
+    const lastLang = document.querySelector('li:last-child');
+    lastLang.remove();
+
+    </script>
+</html>
