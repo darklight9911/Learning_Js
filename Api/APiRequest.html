@@ -1,0 +1,63 @@
+<!XMLhttprequest=state based though number/value>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+
+<body style="background-color: #f0f0f0; color: #333; font-family: Arial, sans-serif; padding: 20px;">
+    <h1>The XMLHttpRequest Object</h1>
+    <p>The XMLHttpRequest object is used to exchange data with a server behind the scenes.</p>
+
+    <p>The XMLHttpRequest object can be used to request data from a web server.</p>
+    <p>The XMLHttpRequest object is a developers dream, because you can:</p>
+    <ul>
+        <li>Update a web page without reloading the page</li>
+        <li>Request data from a server - after the page has loaded</li>
+        <li>Receive data from a server - after the page has loaded</li>
+        <li>Send data to a server - in the background</li>
+    </ul>
+    <div class="card" style="width: 18rem;">
+  <img src=" " class="card-img-top" id="image"alt=" ">
+  <div class="card-body">
+    <h5 class="card-title"> </h5>
+    <p class="card-text"> </p>
+    <a href=" " class="btn btn-primary" id="followers-button"> </a>
+  </div>
+</div>
+    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script> 
+    const requestUrl = "https://api.github.com/users/darklight9911"; 
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", requestUrl, true);//true for async and false for sync
+    xhr.onreadystatechange = function(){
+        console.log("here",xhr.readyState);
+        if(xhr.readyState === 4 && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);//why parse?
+            // The response is a JSON string, so we parse it to convert it into a JavaScript object
+           //this.response is now an object we can work with
+            console.log("Response from server:", response);
+
+            document.getElementById("image").src = response.avatar_url; // Set the image source to the avatar URL
+            document.getElementById("image").alt = response.login + "'s image"; // Set the alt text for the image
+            document.querySelector(".card-title").textContent = response.login; // Set the card title to the user's login name
+            document.querySelector(".card-text").textContent = "Followers: " + response.followers; // Set the card text to show the number of followers
+            document.getElementById("followers-button").href = response.html_url; // Set the button link to the html URL not follower_url cz it sends raw data(not visible page)
+            document.getElementById("followers-button").textContent = "Explore account"; // Set the button text
+            
+        } else if (xhr.readyState === 4) {
+            console.error("Error fetching data:", xhr.status, xhr.statusText);
+        }
+    }
+    xhr.send();
+
+</script>
+
+</html>
